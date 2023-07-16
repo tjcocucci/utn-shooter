@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 10;
+    public float speed = 50;
     public float timeToDestroy = 3.0f;
     private Rigidbody rb;
     // Start is called before the first frame update
     void Awake()
     {
-        Debug.Log("Bullet Shot!");
         rb = GetComponent<Rigidbody>();
         Destroy(gameObject, timeToDestroy);
     }

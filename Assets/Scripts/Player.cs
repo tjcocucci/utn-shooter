@@ -2,19 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : DamageableObject, IShooter
 {
     public float speed = 5;
     public Transform gunMuzzleTransform;
-    public GameObject bulletPrefab;
+    public Bullet bulletPrefab;
     public float timeBetweenShots = 0.5f;
     private float timeForNextShot;
     public Transform bulletContarinerTransform;
 
     // Start is called before the first frame update
-    void Start()
+    override public void Start()
     {
         timeForNextShot = Time.time;
+        base.Start();
     }
 
     // Update is called once per frame
@@ -41,9 +42,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    void Shoot () {
+    public void Shoot () {
         if (Input.GetMouseButton(0) && Time.time > timeForNextShot) {
-            GameObject bullet = Instantiate(bulletPrefab, gunMuzzleTransform.position, gunMuzzleTransform.rotation, bulletContarinerTransform);
+            Bullet bullet = Instantiate(bulletPrefab, gunMuzzleTransform.position, gunMuzzleTransform.rotation, bulletContarinerTransform);
             timeForNextShot = Time.time + timeBetweenShots;
         }
     }
