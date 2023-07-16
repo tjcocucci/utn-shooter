@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : DamageableObject, IShooter
+public class Enemy : DamageableObject
 {
     public Transform playerTransform;
     private float distanceToPlayer;
