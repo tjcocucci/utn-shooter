@@ -2,26 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class Player : DamageableObject, IShooter
 {
     public float speed = 5;
-    public Transform gunMuzzleTransform;
-    public Bullet bulletPrefab;
-    public float timeBetweenShots = 0.5f;
-    private float timeForNextShot;
-    public Transform bulletContarinerTransform;
+    private int WeaponIndex = 1;
+    public Weapon[] weaponList;
+    private Weapon weapon;
 
     // Start is called before the first frame update
     override public void Start()
     {
-        timeForNextShot = Time.time;
+        EquipWeapon(1);
         base.Start();
+    }
+
+    private void EquipWeapon (int index) {
+        if (weapon != null) {
+            Destroy(weapon.gameObject);
+        }
+        WeaponIndex = index;
+        weapon = Instantiate(weaponList[WeaponIndex - 1], transform);
     }
 
     // Update is called once per frame
     void Update()
     {
         Move();
+        ChangeWeapon();
         Aim();
     }
 
@@ -32,7 +40,7 @@ public class Player : DamageableObject, IShooter
     }
     void Aim () {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Plane plane = new Plane(Vector3.up, gunMuzzleTransform.position);
+        Plane plane = new Plane(Vector3.up, weapon.gunMuzzleTransform.position);
         float distance;
         if (plane.Raycast(ray, out distance)) {
             Vector3 target = ray.GetPoint(distance);
@@ -42,10 +50,18 @@ public class Player : DamageableObject, IShooter
         }
     }
 
+    void ChangeWeapon () {
+        if (Input.GetKeyDown(KeyCode.Alpha1) && WeaponIndex != 1) {
+            EquipWeapon(1);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2) && WeaponIndex != 2) {
+            EquipWeapon(2);
+        }
+    }
+
     public void Shoot () {
-        if (Input.GetMouseButton(0) && Time.time > timeForNextShot) {
-            Bullet bullet = Instantiate(bulletPrefab, gunMuzzleTransform.position, gunMuzzleTransform.rotation, bulletContarinerTransform);
-            timeForNextShot = Time.time + timeBetweenShots;
+        if (Input.GetMouseButton(0)) {
+            weapon.Shoot();
         }
     }
 
