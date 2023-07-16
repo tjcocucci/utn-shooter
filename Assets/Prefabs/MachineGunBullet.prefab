@@ -148,3 +148,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 30
   timeToDestroy: 3
+  offset: 0.1
+  enemyCollisionMask:
+    serializedVersion: 2
+    m_Bits: 128
+  playerCollisionMask:
+    serializedVersion: 2
+    m_Bits: 256
+  obstacleCollisionMask:
+    serializedVersion: 2
+    m_Bits: 64

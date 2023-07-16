@@ -16,6 +16,7 @@ public class Weapon : MonoBehaviour
     public void Start()
     {
         timeForNextShot = Time.time;
+        
     }
 
     public void Shoot()
@@ -28,6 +29,7 @@ public class Weapon : MonoBehaviour
                 gunMuzzleTransform.rotation,
                 bulletContarinerTransform
             );
+            bullet.damage = damage;
             timeForNextShot = Time.time + timeBetweenShots;
         }
     }

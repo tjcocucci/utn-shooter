@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1889778110857721964}
   - component: {fileID: 3156061388832681718}
   - component: {fileID: 3040201811064575625}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6395811113837630891}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GunMuzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 4456114641857946460}
   - component: {fileID: 7940181668377535024}
   - component: {fileID: 1425908426530171311}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -293,7 +293,8 @@ MonoBehaviour:
   playerTransform: {fileID: 0}
   distanceToPlayerThreshold: 2
   speed: 2
+  damage: 5
   gunMuzzleTransform: {fileID: 6395811113837630891}
-  bulletPrefab: {fileID: 506297843129079274, guid: fe20226e1eacbf149b7417f929c716a2, type: 3}
+  bulletPrefab: {fileID: 506297843129079274, guid: 557c2b0d4ca5a1b43b92132137226a34, type: 3}
   timeBetweenShots: 2
   bulletContarinerTransform: {fileID: 0}

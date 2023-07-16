@@ -8,6 +8,7 @@ public class Enemy : DamageableObject, IShooter
     private float distanceToPlayer;
     public float distanceToPlayerThreshold = 5.0f;
     public float speed = 2;
+    public float damage = 10;
 
     public Transform gunMuzzleTransform;
     public Bullet bulletPrefab;
@@ -47,6 +48,7 @@ public class Enemy : DamageableObject, IShooter
                 gunMuzzleTransform.rotation,
                 bulletContarinerTransform
             );
+            bullet.damage = damage;
             timeForNextShot = Time.time + timeBetweenShots;
         }
     }

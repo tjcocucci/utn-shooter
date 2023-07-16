@@ -22,8 +22,8 @@ public class UIOverlay : MonoBehaviour
             healthPercent = 100 * player.health / player.totalHealth;
         }
         UIText.text =
-            "Health: " + healthPercent.ToString("0.00") + "%" + "\n" +
-            "Weapon: " + player.weaponList[player.weaponIndex-1].weaponName + "\n" +
+            "Health: " + healthPercent.ToString("0") + "%" + "\n" +
+            "Weapon: " + player.weaponList[player.weaponIndex - 1].weaponName + "\n" +
             "Time" + Time.time.ToString("0.00") + "\n";
     }
 }
