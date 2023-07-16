@@ -51,12 +51,7 @@ public class LevelManager : MonoBehaviour
             currentLevelIndex++;
             currentLevel = levels[currentLevelIndex];
             currentLevel.gameObject.SetActive(true);
-            Debug.Log(
-                "Cleared Level: "
-                    + (currentLevelIndex)
-                    + " - current Level: "
-                    + (currentLevelIndex + 1)
-            );
+            Debug.Log("Level: " + currentLevelIndex);
         }
     }
 }

@@ -27,7 +27,6 @@ public class EnemyManager : MonoBehaviour
         planeBounds = currentLevel.spawnBounds;
         enemyKills = 0;
         numberOfSpawnedEnemies = 0;
-        Debug.Log("EM idx: " + currentLevelIndex);
     }
 
     // Update is called once per frame
@@ -60,7 +59,7 @@ public class EnemyManager : MonoBehaviour
             }
             catch (System.Exception e)
             {
-                Debug.Log(e);
+                Debug.LogException(e);
                 break;
             }
             if (
@@ -96,10 +95,6 @@ public class EnemyManager : MonoBehaviour
 
     void NextLevel()
     {
-        Debug.Log("time" + timeForNextSpawn);
-        Debug.Log("spawned" + numberOfSpawnedEnemies);
-        Debug.Log("total" + currentLevel.totalNumberOfEnemies);
-
         if (OnLevelCleared != null)
         {
             OnLevelCleared(currentLevelIndex);
