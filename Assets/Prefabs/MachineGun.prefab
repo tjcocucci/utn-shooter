@@ -152,8 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae0aeeae69d028f44a7dabcb0ba313a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponName: Machine Gun
   gunMuzzleTransform: {fileID: 8644856677999183964}
   bulletPrefab: {fileID: 506297843129079274, guid: 5b742114cab090f4c965e111953ecd95, type: 3}
-  damage: 10
-  timeBetweenShots: 0.5
+  damage: 2
+  timeBetweenShots: 0.1
   bulletContarinerTransform: {fileID: 0}

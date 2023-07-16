@@ -345,6 +345,7 @@ MonoBehaviour:
   enemyKills: 0
   timeBetweenSpawns: 5
   enemyPrefab: {fileID: 1425908426530171311, guid: f412dc08867a14c4f8c42c66a2ecc21d, type: 3}
+  spawnPlane: {fileID: 554207427}
 --- !u!1 &334247193
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,6 +382,7 @@ MonoBehaviour:
   health: 0
   totalHealth: 100
   speed: 10
+  weaponIndex: 1
   weaponList:
   - {fileID: -7512569959570742126, guid: 5552c8bdf0fc54c4590e335fef1fdc1e, type: 3}
   - {fileID: 4270300549173790122, guid: e6637dd5fad27c2469585367b5ab86e8, type: 3}
@@ -622,6 +624,7 @@ GameObject:
   - component: {fileID: 553521147}
   - component: {fileID: 553521146}
   - component: {fileID: 553521145}
+  - component: {fileID: 553521149}
   m_Layer: 5
   m_Name: UICanvas
   m_TagString: Untagged
@@ -713,6 +716,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &553521149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553521144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d74bf45a2abe0994e91c4cfdd7b2596d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIText: {fileID: 420165453}
 --- !u!1 &554207427
 GameObject:
   m_ObjectHideFlags: 0

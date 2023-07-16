@@ -39,7 +39,6 @@ public class EnemyController : MonoBehaviour
                 enemyHeight,
                 Random.Range(planeBounds.min.z, planeBounds.max.z)
             );
-            Debug.Log(spawnPosition);
             if (Vector3.Distance(spawnPosition, playerTransform.position) > minDistanceToPlayer)
             {
                 break;

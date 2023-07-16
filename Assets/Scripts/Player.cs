@@ -6,7 +6,7 @@ using UnityEngine;
 public class Player : DamageableObject, IShooter
 {
     public float speed = 5;
-    private int WeaponIndex = 1;
+    public int weaponIndex = 1;
     public Weapon[] weaponList;
     private Weapon weapon;
 
@@ -21,8 +21,8 @@ public class Player : DamageableObject, IShooter
         if (weapon != null) {
             Destroy(weapon.gameObject);
         }
-        WeaponIndex = index;
-        weapon = Instantiate(weaponList[WeaponIndex - 1], transform);
+        weaponIndex = index;
+        weapon = Instantiate(weaponList[weaponIndex - 1], transform);
     }
 
     // Update is called once per frame
@@ -51,10 +51,10 @@ public class Player : DamageableObject, IShooter
     }
 
     void ChangeWeapon () {
-        if (Input.GetKeyDown(KeyCode.Alpha1) && WeaponIndex != 1) {
+        if (Input.GetKeyDown(KeyCode.Alpha1) && weaponIndex != 1) {
             EquipWeapon(1);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && WeaponIndex != 2) {
+        if (Input.GetKeyDown(KeyCode.Alpha2) && weaponIndex != 2) {
             EquipWeapon(2);
         }
     }
