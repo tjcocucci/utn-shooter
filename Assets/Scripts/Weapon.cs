@@ -16,7 +16,6 @@ public class Weapon : MonoBehaviour
     public void Start()
     {
         timeForNextShot = Time.time;
-        
     }
 
     public void Shoot()

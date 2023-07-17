@@ -5,19 +5,22 @@ using UnityEngine;
 public class DamageableObject : MonoBehaviour
 {
     public float health;
-    public float totalHealth = 100;
+    public float totalHealth;
     public event System.Action OnObjectDied;
 
-    public void TakeDamage (float damage) {
+    public void TakeDamage(float damage)
+    {
         health -= damage;
-        if (health <= 0) {
+        if (health <= 0)
+        {
             Destroy(gameObject);
-            if (OnObjectDied != null) {
+            if (OnObjectDied != null)
+            {
                 OnObjectDied();
             }
         }
     }
-    
+
     // Start is called before the first frame update
     public virtual void Start()
     {

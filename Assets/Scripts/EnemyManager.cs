@@ -56,8 +56,9 @@ public class EnemyManager : MonoBehaviour
                 Random.Range(planeBounds.min.z, planeBounds.max.z)
             );
             if (
-                Vector3.Distance(spawnPosition, playerTransform.position)
-                > currentLevel.minSpawnDistanceToPlayer
+                playerTransform != null
+                && Vector3.Distance(spawnPosition, playerTransform.position)
+                    > currentLevel.minSpawnDistanceToPlayer
             )
             {
                 foundUsableSpawnPosition = true;
@@ -77,7 +78,7 @@ public class EnemyManager : MonoBehaviour
     {
         enemy.speed = currentLevel.enemySpeed;
         enemy.damage = currentLevel.enemyDamage;
-        enemy.health = currentLevel.enemyHealth;
+        enemy.totalHealth = currentLevel.enemyHealth;
         enemy.timeBetweenShots = currentLevel.enemyTimeBetweenShots;
         enemy.playerTransform = playerTransform;
         enemy.OnObjectDied += OnEnemyDeath;

@@ -32,7 +32,6 @@ public class LevelManager : MonoBehaviour
         currentLevelIndex = 0;
         currentLevel = levels[currentLevelIndex];
         currentLevel.gameObject.SetActive(true);
-        
     }
 
     void OnPlayerDeath()

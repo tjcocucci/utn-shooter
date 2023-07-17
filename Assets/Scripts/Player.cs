@@ -55,7 +55,8 @@ public class Player : DamageableObject
     {
         if (x != 0 || z != 0)
         {
-            Camera.main.transform.localPosition += new Vector3(x, 0, z) * (speed/4) * Time.deltaTime;
+            Camera.main.transform.localPosition +=
+                new Vector3(x, 0, z) * (speed / 4) * Time.deltaTime;
         }
     }
 

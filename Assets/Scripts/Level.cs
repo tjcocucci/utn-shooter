@@ -13,6 +13,7 @@ public class Level : MonoBehaviour
     public float minSpawnDistanceToPlayer;
     public GameObject map;
     public GameObject spawnPlane;
+
     [HideInInspector]
     public Bounds spawnBounds;
 

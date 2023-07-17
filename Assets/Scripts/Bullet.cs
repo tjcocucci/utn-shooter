@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 50;
+    public float speed = 20;
     public float timeToDestroy = 3.0f;
     private Rigidbody rb;
     public float offset = 0.1f;
@@ -51,7 +51,7 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (
+        if ( // Obstacle collision
             Physics.Raycast(
                 ray,
                 out hit,
