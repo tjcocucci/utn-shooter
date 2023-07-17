@@ -9,12 +9,20 @@ public class Player : DamageableObject
     public int weaponIndex = 1;
     public Weapon[] weaponList;
     private Weapon weapon;
+    public bool isAlive = true;
 
     // Start is called before the first frame update
     override public void Start()
     {
         EquipWeapon(1);
         base.Start();
+        OnObjectDied += OnPlayerDeath;
+    }
+
+    void OnPlayerDeath()
+    {
+        isAlive = false;
+        Debug.Log("You died!");
     }
 
     private void EquipWeapon(int index)

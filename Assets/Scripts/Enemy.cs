@@ -27,14 +27,17 @@ public class Enemy : DamageableObject
 
     void Update()
     {
-        distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
-        if (distanceToPlayer > distanceToPlayerThreshold)
+        if (playerTransform != null)
         {
-            transform.position += transform.forward * speed * Time.deltaTime;
-        }
-        transform.LookAt(playerTransform);
+            distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+            if (distanceToPlayer > distanceToPlayerThreshold)
+            {
+                transform.position += transform.forward * speed * Time.deltaTime;
+            }
+            transform.LookAt(playerTransform);
 
-        Shoot();
+            Shoot();
+        }
     }
 
     public void Shoot()

@@ -7,6 +7,7 @@ public class LevelManager : MonoBehaviour
     public Level[] levels;
     public int currentLevelIndex;
     public Level currentLevel;
+    private bool playerIsAlive;
 
     private static LevelManager _instance;
     public static LevelManager Instance
@@ -31,17 +32,24 @@ public class LevelManager : MonoBehaviour
         currentLevelIndex = 0;
         currentLevel = levels[currentLevelIndex];
         currentLevel.gameObject.SetActive(true);
+        
+    }
+
+    void OnPlayerDeath()
+    {
+        playerIsAlive = false;
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        playerIsAlive = true;
         FindObjectOfType<EnemyManager>().OnLevelCleared += NextLevel;
     }
 
     void NextLevel(int levelIndex)
     {
-        if (levelIndex == levels.Length - 1)
+        if (levelIndex == levels.Length - 1 && playerIsAlive)
         {
             Debug.Log("You win!");
         }

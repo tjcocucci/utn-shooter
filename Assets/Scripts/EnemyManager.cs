@@ -47,13 +47,14 @@ public class EnemyManager : MonoBehaviour
     {
         Vector3 spawnPosition = Vector3.zero;
 
-        while (true)
+        bool foundUsableSpawnPosition = false;
+        for (int i = 0; i < 100; i++)
         {
             try
             {
                 spawnPosition = new Vector3(
                     Random.Range(planeBounds.min.x, planeBounds.max.x),
-                    enemyHeight,
+                    enemyHeight*4,
                     Random.Range(planeBounds.min.z, planeBounds.max.z)
                 );
             }
@@ -67,8 +68,14 @@ public class EnemyManager : MonoBehaviour
                 > currentLevel.minSpawnDistanceToPlayer
             )
             {
+                foundUsableSpawnPosition = true;
                 break;
             }
+        }
+        if (!foundUsableSpawnPosition)
+        {
+            Debug.Log("Could not find a spawn position");
+            return;
         }
         Enemy enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
         SetUpEnemyProperties(enemy);
