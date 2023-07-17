@@ -26,15 +26,22 @@ public class UIOverlay : MonoBehaviour
         {
             healthPercent = 100 * player.health / player.totalHealth;
         }
-        won = levelManager.currentLevelIndex == levelManager.levels.Length - 1 && player != null;
+        won =
+            levelManager.currentLevelIndex == levelManager.levels.Length - 1
+            && player != null
+            && player.health > 0
+            && enemyManager.enemyKills == levelManager.currentLevel.totalNumberOfEnemies;
         lost = player == null;
-        if (won) {
+        if (won)
+        {
             UIText.text = "You win!";
         }
-        else if (lost) {
+        else if (lost)
+        {
             UIText.text = "You lose!";
         }
-        else {
+        else
+        {
             UpdateText();
         }
     }
@@ -42,10 +49,21 @@ public class UIOverlay : MonoBehaviour
     void UpdateText()
     {
         UIText.text =
-            "Health: " + healthPercent.ToString("0") + "%" + "\n" +
-            "Weapon: " + player.weaponList[player.weaponIndex - 1].weaponName + "\n" +
-            "Level: " + (levelManager.currentLevelIndex + 1) + "\n" +
-            "Kills: " + enemyManager.enemyKills + "\n" +
-            "Time: " + Time.time.ToString("0.00") + "\n";
+            "Health: "
+            + healthPercent.ToString("0")
+            + "%"
+            + "\n"
+            + "Weapon: "
+            + player.weaponList[player.weaponIndex - 1].weaponName
+            + "\n"
+            + "Level: "
+            + (levelManager.currentLevelIndex + 1)
+            + "\n"
+            + "Kills: "
+            + enemyManager.enemyKills
+            + "\n"
+            + "Time: "
+            + Time.time.ToString("0.00")
+            + "\n";
     }
 }

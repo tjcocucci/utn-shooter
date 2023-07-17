@@ -48,3 +48,5 @@ El repositorio está subido en https://github.com/tjcocucci/utn-shooter
 - Los enemigos podrían portar un arma igual que lo hace el jugador, sería más limpia la implementación y ahorraría algo de código repetido, esto es sencillo de hacer pero no lo prioricé.
 - Usé un LevelManager y un EnemyManager pero no un GameManager. No se si la arquitectura que elegí será la mejor, capaz queda más prolijo usando un GameManager.
 - Varios aspectos son muy prototípicos, por ejemplo habría que calibrar la vida, velocidad de enemigos, velocidad de balas, etc. para que el juego sea algo más entretenido.
+- Al cambiar de nivel puede que un obstáculo se active superpuesto a un jugador. Esto se podría cambiar haciendo que el jugador reinicie al centro del mapa y asegurarse que no haya obstáculos ahí o generando mapas de manera procedural.
+- El jugador rota incorrectamente cuando el aim está muy cerca suyo.

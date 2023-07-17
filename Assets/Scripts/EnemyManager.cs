@@ -48,21 +48,13 @@ public class EnemyManager : MonoBehaviour
         Vector3 spawnPosition = Vector3.zero;
 
         bool foundUsableSpawnPosition = false;
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 500; i++)
         {
-            try
-            {
-                spawnPosition = new Vector3(
-                    Random.Range(planeBounds.min.x, planeBounds.max.x),
-                    enemyHeight*4,
-                    Random.Range(planeBounds.min.z, planeBounds.max.z)
-                );
-            }
-            catch (System.Exception e)
-            {
-                Debug.LogException(e);
-                break;
-            }
+            spawnPosition = new Vector3(
+                Random.Range(planeBounds.min.x, planeBounds.max.x),
+                enemyHeight * 4,
+                Random.Range(planeBounds.min.z, planeBounds.max.z)
+            );
             if (
                 Vector3.Distance(spawnPosition, playerTransform.position)
                 > currentLevel.minSpawnDistanceToPlayer
