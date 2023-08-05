@@ -12,10 +12,14 @@ public class Bullet : MonoBehaviour
     public LayerMask playerCollisionMask;
     public LayerMask obstacleCollisionMask;
     public float damage { get; set; }
+    public AudioSource bulletObstacleHitSound;
+    public AudioSource bulletPlayerOrEnemyHitSound;
+    public AudioSource bulletShootSound;
 
     // Start is called before the first frame update
     void Awake()
     {
+        bulletShootSound.Play();
         rb = GetComponent<Rigidbody>();
         Destroy(gameObject, timeToDestroy);
     }
@@ -52,6 +56,7 @@ public class Bullet : MonoBehaviour
         }
 
         if ( // Obstacle collision
+
             Physics.Raycast(
                 ray,
                 out hit,

@@ -9,7 +9,9 @@ public class Player : DamageableObject
     public int weaponIndex = 1;
     public Weapon[] weaponList;
     private Weapon weapon;
+    private bool won = false;
     public bool isAlive = true;
+    public bool devMode = false;
 
     // Start is called before the first frame update
     override public void Start()
@@ -17,6 +19,11 @@ public class Player : DamageableObject
         EquipWeapon(1);
         base.Start();
         OnObjectDied += OnPlayerDeath;
+        LevelManager.Instance.OnWin += OnWin;
+        if (devMode)
+        {
+            health = 100000;
+        }
     }
 
     void OnPlayerDeath()
@@ -38,9 +45,28 @@ public class Player : DamageableObject
     // Update is called once per frame
     void Update()
     {
-        Move();
-        ChangeWeapon();
-        Aim();
+        if (!won)
+        {
+            Move();
+            ChangeWeapon();
+            Aim();
+        }
+        if (devMode)
+        {
+            devModeControls();
+        }
+    }
+
+    void devModeControls()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            TakeDamage(float.PositiveInfinity);
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            LevelManager.Instance.NextLevel(LevelManager.Instance.currentLevelIndex+1);
+        }
     }
 
     void Move()
@@ -58,6 +84,11 @@ public class Player : DamageableObject
             Camera.main.transform.localPosition +=
                 new Vector3(x, 0, z) * (speed / 4) * Time.deltaTime;
         }
+    }
+
+    public void OnWin()
+    {
+        won = true;
     }
 
     void Aim()

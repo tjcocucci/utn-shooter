@@ -63,3 +63,8 @@ crashlytics-build.properties
 
 # Compressed files
 *.rar
+
+# Third Party Assets
+Assets/Audio/RetroGamesSoundFX/
+Assets/TextMesh Pro/
+Assets/LeanTween/

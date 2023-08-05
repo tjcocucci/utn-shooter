@@ -2,21 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIOverlay : MonoBehaviour
 {
     public Player player;
 
+    public Banner banner;
     private float healthPercent;
     public Text UIText;
     private LevelManager levelManager;
     public EnemyManager enemyManager;
-    private bool won;
-    private bool lost;
+    private bool pauseUpdates;
 
     void Start()
     {
         levelManager = LevelManager.Instance;
+        player.OnObjectDied += OnPlayerDeath;
+        levelManager.OnWin += OnWin;
     }
 
     void Update()
@@ -26,19 +29,9 @@ public class UIOverlay : MonoBehaviour
         {
             healthPercent = 100 * player.health / player.totalHealth;
         }
-        won =
-            levelManager.currentLevelIndex == levelManager.levels.Length - 1
-            && player != null
-            && player.health > 0
-            && enemyManager.enemyKills == levelManager.currentLevel.totalNumberOfEnemies;
-        lost = player == null;
-        if (won)
+        if (pauseUpdates)
         {
-            UIText.text = "You win!";
-        }
-        else if (lost)
-        {
-            UIText.text = "You lose!";
+            return;
         }
         else
         {
@@ -65,5 +58,20 @@ public class UIOverlay : MonoBehaviour
             + "Time: "
             + Time.time.ToString("0.00")
             + "\n";
+    }
+
+    public void OnPlayerDeath()
+    {
+        pauseUpdates = true;
+        banner.SetText("You died!");
+        banner.ShowBanner();
+
+    }
+
+    public void OnWin()
+    {
+        pauseUpdates = true;
+        banner.SetText("You win!");
+        banner.ShowBanner();
     }
 }

@@ -68,7 +68,6 @@ public class EnemyManager : MonoBehaviour
         if (!foundUsableSpawnPosition)
         {
             Debug.Log("Could not find a spawn position");
-            return;
         }
         Enemy enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
         SetUpEnemyProperties(enemy);

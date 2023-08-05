@@ -9,6 +9,8 @@ public class LevelManager : MonoBehaviour
     public Level currentLevel;
     private bool playerIsAlive;
 
+    public event System.Action OnWin;
+
     private static LevelManager _instance;
     public static LevelManager Instance
     {
@@ -44,11 +46,14 @@ public class LevelManager : MonoBehaviour
         FindObjectOfType<EnemyManager>().OnLevelCleared += NextLevel;
     }
 
-    void NextLevel(int levelIndex)
+    public void NextLevel(int levelIndex)
     {
         if (levelIndex == levels.Length - 1 && playerIsAlive)
         {
-            Debug.Log("You win!");
+            if (OnWin != null)
+            {
+                OnWin();
+            }
         }
         else
         {

@@ -23,5 +23,6 @@ public class Level : MonoBehaviour
     {
         mapCenter = map.transform.position;
         spawnBounds = spawnPlane.GetComponent<MeshRenderer>().bounds;
+        Debug.Log(spawnBounds);
     }
 }
