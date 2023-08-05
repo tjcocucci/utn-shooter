@@ -15,7 +15,7 @@ public class LevelManager : MonoBehaviour
         get { return _instance; }
     }
 
-    private void Awake()
+    private void OnEnable()
     {
         if (_instance != null && _instance != this)
         {
@@ -29,9 +29,7 @@ public class LevelManager : MonoBehaviour
         {
             level.gameObject.SetActive(false);
         }
-        currentLevelIndex = 0;
-        currentLevel = levels[currentLevelIndex];
-        currentLevel.gameObject.SetActive(true);
+        StartLevel(currentLevelIndex);
     }
 
     void OnPlayerDeath()
@@ -55,10 +53,15 @@ public class LevelManager : MonoBehaviour
         else
         {
             currentLevel.gameObject.SetActive(false);
-            currentLevelIndex++;
-            currentLevel = levels[currentLevelIndex];
-            currentLevel.gameObject.SetActive(true);
-            Debug.Log("Level: " + currentLevelIndex);
+            StartLevel(levelIndex + 1);
         }
+    }
+
+    public void StartLevel(int i)
+    {
+        currentLevelIndex = i;
+        currentLevel = levels[currentLevelIndex];
+        currentLevel.gameObject.SetActive(true);
+        Debug.Log("Level: " + currentLevelIndex);
     }
 }
