@@ -14,33 +14,48 @@ public class UIOverlay : MonoBehaviour
     private LevelManager levelManager;
     private bool pauseUpdates;
 
+    private static UIOverlay _instance;
+    public static UIOverlay Instance
+    {
+        get { return _instance; }
+    }
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
+
     void Start()
     {
-        player = FindObjectOfType<Player>();
         levelManager = LevelManager.Instance;
-        player.OnObjectDied += OnPlayerDeath;
         levelManager.OnWin += OnWin;
     }
 
-    void OnEnable()
+    public void StartUI()
     {
+        Debug.Log("Starting UI");
         pauseUpdates = false;
         player = FindObjectOfType<Player>();
+        player.OnObjectDied += OnPlayerDeath;
     }
 
     void Update()
     {
-        healthPercent = 0;
-        if (player != null)
-        {
-            healthPercent = 100 * player.health / player.totalHealth;
-        }
         if (pauseUpdates)
         {
             return;
         }
-        else
+        healthPercent = 0;
+        if (player != null)
         {
+            healthPercent = 100 * player.health / player.totalHealth;
             UpdateText();
         }
     }
@@ -59,7 +74,7 @@ public class UIOverlay : MonoBehaviour
             + (levelManager.currentLevelIndex + 1)
             + "\n"
             + "Kills: "
-            + EnemyManager.Instance.enemyKills
+            + levelManager.enemyKills
             + "\n"
             + "Time: "
             + Time.time.ToString("0.00")

@@ -8,16 +8,21 @@ public class DamageableObject : MonoBehaviour
     public float totalHealth;
     public event System.Action OnObjectDied;
 
+    public bool IsAlive()
+    {
+        return health > 0;
+    }
+
     public void TakeDamage(float damage)
     {
         health -= damage;
         if (health <= 0)
         {
-            Destroy(gameObject);
             if (OnObjectDied != null)
             {
                 OnObjectDied();
             }
+            Destroy(gameObject);
         }
     }
 

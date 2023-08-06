@@ -47,7 +47,6 @@ public class Banner : MonoBehaviour
     }
 
     void SwitchToGame () {
-        LevelManager.Instance.RestartGame();
         LevelManager.Instance.LoadLevel(0);
         HideBanner();
     }

@@ -5,12 +5,18 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     public Player playerPrefab;
+    public EnemySpawner enemySpawnerPrefab;
     public Level[] levels;
     public int currentLevelIndex;
     public Level currentLevel;
+
+    [HideInInspector]
     public Player player;
-    public bool playerIsAlive;
-    private EnemyManager enemyManager;
+    [HideInInspector]
+
+    private EnemySpawner enemySpawner;
+
+    public int enemyKills;
 
     public event System.Action OnWin;
 
@@ -20,7 +26,7 @@ public class LevelManager : MonoBehaviour
         get { return _instance; }
     }
 
-    private void OnEnable()
+    private void Awake()
     {
         if (_instance != null && _instance != this)
         {
@@ -34,71 +40,86 @@ public class LevelManager : MonoBehaviour
         {
             level.gameObject.SetActive(false);
         }
+        enemySpawner = Instantiate(enemySpawnerPrefab, Vector3.zero, Quaternion.identity);
     }
 
     void OnPlayerDeath()
     {
-        playerIsAlive = false;
+        enemySpawner.Disable();
+        enemySpawner.CleanUp();
+        player.OnObjectDied -= OnPlayerDeath;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        playerIsAlive = true;
-        enemyManager = EnemyManager.Instance;
-        enemyManager.OnLevelCleared += LoadLevel;
+        currentLevelIndex = 0;
+        currentLevel = levels[currentLevelIndex];
+        enemyKills = 0;
+
+        Debug.Log("enemySpawner");
+        Debug.Log(enemySpawner.isEnabled);
     }
 
     public void LoadLevel(int levelIndex)
     {
-        if (levelIndex == levels.Length && playerIsAlive)
+        if (levelIndex > levels.Length)
+        {
+            Debug.LogError("Level index out of range!");
+            return;
+        }
+        if (levelIndex == levels.Length)
         {
             if (OnWin != null)
             {
                 OnWin();
             }
-        }
-        else
-        {
-            StartLevel(levelIndex);
-        }
-    }
-
-    public void StartLevel(int i)
-    {
-        if (i >= levels.Length)
-        {
-            Debug.LogError("Level index out of range!");
             return;
         }
-        if (i == 0)
+        if (levelIndex == 0)
         {
             if (player != null)
             {
                 Debug.Log("Destroying player");
                 Destroy(player.gameObject);
             }
-            player = Instantiate(playerPrefab, levels[i].playerSpawnPosition, Quaternion.identity);
+            player = Instantiate(
+                playerPrefab,
+                levels[levelIndex].playerSpawnPosition,
+                Quaternion.identity
+            );
+            player.OnObjectDied += OnPlayerDeath;
         }
 
-        if (currentLevel != null)
-        {
-            currentLevel.gameObject.SetActive(false);
-        }   
-        currentLevelIndex = i;
+        enemyKills = 0;
+
+        currentLevel?.gameObject.SetActive(false);
+        currentLevelIndex = levelIndex;
         currentLevel = levels[currentLevelIndex];
         currentLevel.gameObject.SetActive(true);
         Debug.Log("Level: " + currentLevelIndex);
+
+        // Create Enemy Spawner
+        enemySpawner.CleanUp();
+        enemySpawner.SetUp(currentLevel, player);
+        enemySpawner.Enable();
+
+        UIOverlay.Instance.StartUI();
+
     }
 
-    public void RestartGame()
+    public void OnEnemyDeath()
     {
-        StartLevel(0);
-        if (enemyManager == null)
+        enemyKills++;
+        if (enemyKills == currentLevel.totalNumberOfEnemies)
         {
-            enemyManager = EnemyManager.Instance;
+            Invoke("NextLevel", 1);
         }
-        enemyManager.SetUp();
-        enemyManager.RemoveEnemies();
     }
+
+    void NextLevel()
+    {
+        LoadLevel(currentLevelIndex + 1);
+    }
+
 }
