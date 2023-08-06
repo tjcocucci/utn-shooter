@@ -12,8 +12,8 @@ public class MenuUI : MonoBehaviour
     }
     void SwitchToGame () {
         gameContainer.SetActive(true);
-        gameObject.SetActive(false);
         LevelManager.Instance.LoadLevel(0);
+        gameObject.SetActive(false);
     }
 
     public void OnQuitButtonClicked () {

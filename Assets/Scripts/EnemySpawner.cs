@@ -42,7 +42,7 @@ public class EnemySpawner : MonoBehaviour
         timeBetweenSpawns = level.timeBetweenSpawns;
         timeForNextSpawn = Time.time + timeBetweenSpawns;
         minSpawnDistanceToPlayer = level.minSpawnDistanceToPlayer;
-        planeBounds = level.spawnBounds;
+        planeBounds = level.GetSpawnBounds();
         
         enemySpeed = level.enemySpeed;
         enemyDamage = level.enemyDamage;

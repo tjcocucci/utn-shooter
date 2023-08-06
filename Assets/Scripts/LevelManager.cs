@@ -53,12 +53,6 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentLevelIndex = 0;
-        currentLevel = levels[currentLevelIndex];
-        enemyKills = 0;
-
-        Debug.Log("enemySpawner");
-        Debug.Log(enemySpawner.isEnabled);
     }
 
     public void LoadLevel(int levelIndex)
