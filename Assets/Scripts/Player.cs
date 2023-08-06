@@ -65,7 +65,7 @@ public class Player : DamageableObject
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
-            LevelManager.Instance.NextLevel(LevelManager.Instance.currentLevelIndex+1);
+            LevelManager.Instance.LoadLevel(LevelManager.Instance.currentLevelIndex+1);
         }
     }
 
@@ -123,5 +123,15 @@ public class Player : DamageableObject
         {
             weapon.Shoot();
         }
+    }
+
+    public void resetPlayer()
+    {
+        isAlive = true;
+        won = false;
+        health = totalHealth;
+        transform.position = Vector3.zero;
+        transform.rotation = Quaternion.identity;
+        EquipWeapon(1);
     }
 }

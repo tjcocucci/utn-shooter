@@ -19,7 +19,7 @@ public class Enemy : DamageableObject
     // Start is called before the first frame update
     public override void Start()
     {
-        playerTransform = GameObject.Find("Player").transform;
+        playerTransform = FindObjectOfType<Player>().transform;
         bulletContarinerTransform = GameObject.Find("BulletContainer").transform;
         timeForNextShot = Time.time;
         base.Start();

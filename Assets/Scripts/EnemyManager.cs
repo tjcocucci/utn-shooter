@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    public Transform playerTransform;
+    private Transform playerTransform;
+    public Transform enemyContainerTransform;
     public int enemyKills;
     public Enemy enemyPrefab;
     private float enemyHeight;
@@ -16,10 +17,35 @@ public class EnemyManager : MonoBehaviour
     private Bounds planeBounds;
     private float timeForNextSpawn;
 
+    private List<Enemy> enemies = new List<Enemy>();
+
+    private static EnemyManager _instance;
+    public static EnemyManager Instance
+    {
+        get { return _instance; }
+    }
+
+    void OnEnable()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         levelManager = LevelManager.Instance;
+        SetUp();
+    }
+
+    public void SetUp()
+    {
         currentLevel = levelManager.currentLevel;
         currentLevelIndex = levelManager.currentLevelIndex;
         timeForNextSpawn = Time.time + currentLevel.timeBetweenSpawns;
@@ -27,6 +53,7 @@ public class EnemyManager : MonoBehaviour
         planeBounds = currentLevel.spawnBounds;
         enemyKills = 0;
         numberOfSpawnedEnemies = 0;
+        playerTransform = FindObjectOfType<Player>().transform;
     }
 
     // Update is called once per frame
@@ -35,6 +62,7 @@ public class EnemyManager : MonoBehaviour
         if (
             Time.time > timeForNextSpawn
             && numberOfSpawnedEnemies < currentLevel.totalNumberOfEnemies
+            && LevelManager.Instance.playerIsAlive
         )
         {
             Spawn();
@@ -69,7 +97,9 @@ public class EnemyManager : MonoBehaviour
         {
             Debug.Log("Could not find a spawn position");
         }
+        Debug.Log("Enemy spawned at " + spawnPosition);
         Enemy enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+        enemies.Add(enemy);
         SetUpEnemyProperties(enemy);
     }
 
@@ -96,11 +126,19 @@ public class EnemyManager : MonoBehaviour
     {
         if (OnLevelCleared != null)
         {
-            OnLevelCleared(currentLevelIndex);
+            OnLevelCleared(currentLevelIndex + 1);
             if (currentLevelIndex < levelManager.levels.Length - 1)
             {
                 Start();
             }
+        }
+    }
+
+    public void RemoveEnemies()
+    {
+        foreach (Enemy enemy in enemies)
+        {
+            Destroy(enemy.gameObject);
         }
     }
 }

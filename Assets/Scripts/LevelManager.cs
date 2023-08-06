@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+    public Player playerPrefab;
     public Level[] levels;
     public int currentLevelIndex;
     public Level currentLevel;
-    private bool playerIsAlive;
+    public Player player;
+    public bool playerIsAlive;
+    private EnemyManager enemyManager;
 
     public event System.Action OnWin;
 
@@ -31,7 +34,6 @@ public class LevelManager : MonoBehaviour
         {
             level.gameObject.SetActive(false);
         }
-        StartLevel(currentLevelIndex);
     }
 
     void OnPlayerDeath()
@@ -43,10 +45,11 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         playerIsAlive = true;
-        FindObjectOfType<EnemyManager>().OnLevelCleared += NextLevel;
+        enemyManager = EnemyManager.Instance;
+        enemyManager.OnLevelCleared += LoadLevel;
     }
 
-    public void NextLevel(int levelIndex)
+    public void LoadLevel(int levelIndex)
     {
         if (levelIndex == levels.Length - 1 && playerIsAlive)
         {
@@ -57,16 +60,41 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            currentLevel.gameObject.SetActive(false);
-            StartLevel(levelIndex + 1);
+            StartLevel(levelIndex);
         }
     }
 
     public void StartLevel(int i)
     {
+        if (i >= levels.Length)
+        {
+            Debug.LogError("Level index out of range!");
+            return;
+        }
+        if (i == 0)
+        {
+            if (player != null)
+            {
+                Debug.Log("Destroying player");
+                Destroy(player.gameObject);
+            }
+            player = Instantiate(playerPrefab, levels[i].playerSpawnPosition, Quaternion.identity);
+        }
+
+        if (currentLevel != null)
+        {
+            currentLevel.gameObject.SetActive(false);
+        }   
         currentLevelIndex = i;
         currentLevel = levels[currentLevelIndex];
         currentLevel.gameObject.SetActive(true);
         Debug.Log("Level: " + currentLevelIndex);
+    }
+
+    public void RestartGame()
+    {
+        StartLevel(0);
+        enemyManager.SetUp();
+        enemyManager.RemoveEnemies();
     }
 }

@@ -15,6 +15,7 @@ public class Weapon : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
+        bulletContarinerTransform = GameObject.Find("BulletContainer").transform;
         timeForNextShot = Time.time;
     }
 

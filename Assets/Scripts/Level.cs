@@ -11,6 +11,7 @@ public class Level : MonoBehaviour
     public float enemyHealth;
     public float enemyTimeBetweenShots;
     public float minSpawnDistanceToPlayer;
+    public Vector3 playerSpawnPosition;
     public GameObject map;
     public GameObject spawnPlane;
 
@@ -19,10 +20,13 @@ public class Level : MonoBehaviour
 
     private Vector3 mapCenter;
 
+    void OnEnable()
+    {
+    }
+
     void Start()
     {
         mapCenter = map.transform.position;
         spawnBounds = spawnPlane.GetComponent<MeshRenderer>().bounds;
-        Debug.Log(spawnBounds);
     }
 }

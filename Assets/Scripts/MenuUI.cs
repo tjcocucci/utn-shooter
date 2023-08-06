@@ -13,6 +13,7 @@ public class MenuUI : MonoBehaviour
     void SwitchToGame () {
         gameContainer.SetActive(true);
         gameObject.SetActive(false);
+        LevelManager.Instance.LoadLevel(0);
     }
 
     public void OnQuitButtonClicked () {

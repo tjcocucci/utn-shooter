@@ -555,6 +555,7 @@ MonoBehaviour:
   enemyHealth: 1
   enemyTimeBetweenShots: 2
   minSpawnDistanceToPlayer: 2
+  playerSpawnPosition: {x: 0, y: 0.5, z: 0}
   map: {fileID: 728780440956312646}
   spawnPlane: {fileID: 7616655735016503459}
   spawnBounds:

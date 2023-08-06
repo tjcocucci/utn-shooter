@@ -6,20 +6,26 @@ using TMPro;
 
 public class UIOverlay : MonoBehaviour
 {
-    public Player player;
+    private Player player;
 
     public Banner banner;
     private float healthPercent;
     public Text UIText;
     private LevelManager levelManager;
-    public EnemyManager enemyManager;
     private bool pauseUpdates;
 
     void Start()
     {
+        player = FindObjectOfType<Player>();
         levelManager = LevelManager.Instance;
         player.OnObjectDied += OnPlayerDeath;
         levelManager.OnWin += OnWin;
+    }
+
+    void OnEnable()
+    {
+        pauseUpdates = false;
+        player = FindObjectOfType<Player>();
     }
 
     void Update()
@@ -53,7 +59,7 @@ public class UIOverlay : MonoBehaviour
             + (levelManager.currentLevelIndex + 1)
             + "\n"
             + "Kills: "
-            + enemyManager.enemyKills
+            + EnemyManager.Instance.enemyKills
             + "\n"
             + "Time: "
             + Time.time.ToString("0.00")
@@ -65,7 +71,6 @@ public class UIOverlay : MonoBehaviour
         pauseUpdates = true;
         banner.SetText("You died!");
         banner.ShowBanner();
-
     }
 
     public void OnWin()
