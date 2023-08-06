@@ -46,6 +46,10 @@ public class EnemyManager : MonoBehaviour
 
     public void SetUp()
     {
+        if (levelManager == null)
+        {
+            levelManager = LevelManager.Instance;
+        }
         currentLevel = levelManager.currentLevel;
         currentLevelIndex = levelManager.currentLevelIndex;
         timeForNextSpawn = Time.time + currentLevel.timeBetweenSpawns;
@@ -138,7 +142,10 @@ public class EnemyManager : MonoBehaviour
     {
         foreach (Enemy enemy in enemies)
         {
-            Destroy(enemy.gameObject);
+            if (enemy != null)
+            {
+                Destroy(enemy.gameObject);
+            }
         }
     }
 }

@@ -51,7 +51,7 @@ public class LevelManager : MonoBehaviour
 
     public void LoadLevel(int levelIndex)
     {
-        if (levelIndex == levels.Length - 1 && playerIsAlive)
+        if (levelIndex == levels.Length && playerIsAlive)
         {
             if (OnWin != null)
             {
@@ -94,6 +94,10 @@ public class LevelManager : MonoBehaviour
     public void RestartGame()
     {
         StartLevel(0);
+        if (enemyManager == null)
+        {
+            enemyManager = EnemyManager.Instance;
+        }
         enemyManager.SetUp();
         enemyManager.RemoveEnemies();
     }

@@ -11,6 +11,11 @@ public class ColorPicker : MonoBehaviour
         ApplyColor();
     }
 
+    void OnEnable()
+    {
+        ApplyColor();
+    }
+
     void Start()
     {
         ApplyColor();

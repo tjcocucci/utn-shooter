@@ -20,10 +20,6 @@ public class Level : MonoBehaviour
 
     private Vector3 mapCenter;
 
-    void OnEnable()
-    {
-    }
-
     void Start()
     {
         mapCenter = map.transform.position;

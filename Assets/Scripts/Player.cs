@@ -40,6 +40,10 @@ public class Player : DamageableObject
         }
         weaponIndex = index;
         weapon = Instantiate(weaponList[weaponIndex - 1], transform);
+        if (devMode)
+        {
+            weapon.damage = 100000;
+        }
     }
 
     // Update is called once per frame

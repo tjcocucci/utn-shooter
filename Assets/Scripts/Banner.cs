@@ -36,16 +36,20 @@ public class Banner : MonoBehaviour
     public void OnBackToMenuButtonClick()
     {
         buttonClickSound.Play();
-        gameContainer.SetActive(false);
-        menuGameObject.SetActive(true);
         Invoke("SwitchToMenu", 0.5f);
         HideBanner();
+    }
+
+    void SwitchToMenu()
+    {
+        gameContainer.SetActive(false);
+        menuGameObject.SetActive(true);
     }
 
     void SwitchToGame () {
         LevelManager.Instance.RestartGame();
         LevelManager.Instance.LoadLevel(0);
-        gameObject.SetActive(false);
+        HideBanner();
     }
 
 }
