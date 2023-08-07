@@ -101,10 +101,12 @@ public class Player : DamageableObject
     {
         if (Input.GetKeyDown(KeyCode.Alpha1) && weaponIndex != 0)
         {
+            weaponIndex = 0;
             weaponController.EquipWeapon(0);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2) && weaponIndex != 1)
         {
+            weaponIndex = 1;
             weaponController.EquipWeapon(1);
         }
     }

@@ -21,7 +21,7 @@ public class Weapon : MonoBehaviour
 
     public void Shoot()
     {
-        if (Input.GetMouseButton(0) && Time.time > timeForNextShot)
+        if (Time.time > timeForNextShot)
         {
             Bullet bullet = Instantiate(
                 bulletPrefab,
