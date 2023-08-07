@@ -20,7 +20,7 @@ public class EnemySpawner : MonoBehaviour
     private float enemySpeed;
     private float enemyDamage;
     private float enemyHealth;
-    private float enemyTimeBetweenShots;
+    private int enemyWeaponIndex;
 
 
     private Bounds planeBounds;
@@ -47,7 +47,7 @@ public class EnemySpawner : MonoBehaviour
         enemySpeed = level.enemySpeed;
         enemyDamage = level.enemyDamage;
         enemyHealth = level.enemyHealth;
-        enemyTimeBetweenShots = level.enemyTimeBetweenShots;
+        enemyWeaponIndex = level.enemyWeaponIndex;
 
 
     }
@@ -128,7 +128,7 @@ public class EnemySpawner : MonoBehaviour
         enemy.speed = enemySpeed;
         enemy.damage = enemyDamage;
         enemy.totalHealth = enemyHealth;
-        enemy.timeBetweenShots = enemyTimeBetweenShots;
+        enemy.weaponIndex = enemyWeaponIndex;
         enemy.playerTransform = playerTransform;
         enemy.OnObjectDied += LevelManager.Instance.OnEnemyDeath;
     }

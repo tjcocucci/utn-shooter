@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5006466753109313382
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6750610172445209766}
+  m_Layer: 0
+  m_Name: WeaponHold
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6750610172445209766
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5006466753109313382}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0.056, y: 0, z: 0.521}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4330578791810855162}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &5794847964816647875
 GameObject:
   m_ObjectHideFlags: 0
@@ -14,6 +45,7 @@ GameObject:
   - component: {fileID: 2813795483188576110}
   - component: {fileID: 1004235612041953662}
   - component: {fileID: 2349870952552179704}
+  - component: {fileID: 8380741406189761679}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -28,13 +60,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5794847964816647875}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -576.9158, y: -276.45276, z: -0.21858513}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6750610172445209766}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5681469361608961657
 MeshFilter:
@@ -151,9 +184,24 @@ MonoBehaviour:
   health: 0
   totalHealth: 100
   speed: 10
-  weaponIndex: 1
-  weaponList:
-  - {fileID: -7512569959570742126, guid: 5552c8bdf0fc54c4590e335fef1fdc1e, type: 3}
-  - {fileID: 4270300549173790122, guid: e6637dd5fad27c2469585367b5ab86e8, type: 3}
+  weaponIndex: 0
   isAlive: 1
   devMode: 1
+  weaponController: {fileID: 0}
+--- !u!114 &8380741406189761679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5794847964816647875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4a26fe4e60b6594b821c1df40db0068, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponList:
+  - {fileID: 3123295647542885958, guid: cb0dbe1f0b678a24dbbf6db069c79645, type: 3}
+  - {fileID: 3123295647542885958, guid: b02fdfff7a595d74384735869ea9e28c, type: 3}
+  weapon: {fileID: 0}
+  weaponHoldTransform: {fileID: 6750610172445209766}

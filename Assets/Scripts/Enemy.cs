@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(WeaponController))]
 public class Enemy : DamageableObject
 {
     public Transform playerTransform;
@@ -9,19 +11,19 @@ public class Enemy : DamageableObject
     public float distanceToPlayerThreshold = 5.0f;
     public float speed = 2;
     public float damage = 10;
+    public WeaponController weaponController;
+    public int weaponIndex = 0;
 
-    public Transform gunMuzzleTransform;
-    public Bullet bulletPrefab;
-    public float timeBetweenShots = 2;
     private float timeForNextShot;
-    public Transform bulletContarinerTransform;
+    public float timeBetweenShots = 0.5f;
 
     // Start is called before the first frame update
     public override void Start()
     {
         playerTransform = FindObjectOfType<Player>().transform;
-        bulletContarinerTransform = GameObject.Find("BulletContainer").transform;
-        timeForNextShot = Time.time;
+        weaponController = GetComponent<WeaponController>();
+        weaponController.EquipWeapon(weaponIndex);
+        timeForNextShot = Time.time + weaponController.weapon.timeBetweenShots;
         base.Start();
     }
 
@@ -45,14 +47,9 @@ public class Enemy : DamageableObject
         if (Time.time > timeForNextShot)
         {
             transform.LookAt(playerTransform);
-            Bullet bullet = Instantiate(
-                bulletPrefab,
-                gunMuzzleTransform.position,
-                gunMuzzleTransform.rotation,
-                bulletContarinerTransform
-            );
-            bullet.damage = damage;
-            timeForNextShot = Time.time + timeBetweenShots;
+            weaponController.weapon.Shoot();
+            timeForNextShot =
+                Time.time + timeBetweenShots + (timeBetweenShots * 0.1f) * Random.Range(-1, 1);
         }
     }
 }

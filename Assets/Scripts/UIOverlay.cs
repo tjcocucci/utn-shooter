@@ -68,7 +68,7 @@ public class UIOverlay : MonoBehaviour
             + "%"
             + "\n"
             + "Weapon: "
-            + player.weaponList[player.weaponIndex - 1].weaponName
+            + player.weaponController.weaponList[player.weaponIndex].weaponName
             + "\n"
             + "Level: "
             + (levelManager.currentLevelIndex + 1)

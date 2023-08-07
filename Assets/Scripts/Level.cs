@@ -9,7 +9,7 @@ public class Level : MonoBehaviour
     public float enemySpeed;
     public float enemyDamage;
     public float enemyHealth;
-    public float enemyTimeBetweenShots;
+    public int enemyWeaponIndex;
     public float minSpawnDistanceToPlayer;
     public Vector3 playerSpawnPosition;
     public GameObject map;
