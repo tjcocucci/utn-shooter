@@ -102,7 +102,7 @@ public class LevelManager : MonoBehaviour
         {
             startGameSound.Play();
             UIOverlay.Instance.ShowInstructions();
-            StartCoroutine(enableSpawnerAfterDelay(5));
+            StartCoroutine(enableSpawnerAfterDelay(3));
         } else {
             enemySpawner.Enable();
         }

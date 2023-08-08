@@ -550,6 +550,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalNumberOfEnemies: 3
   timeBetweenSpawns: 1
+  enemyType: 0
   enemySpeed: 2
   enemyDamage: 5
   enemyHealth: 1

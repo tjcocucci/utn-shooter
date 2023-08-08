@@ -21,7 +21,7 @@ public class EnemySpawner : MonoBehaviour
     private float enemyDamage;
     private float enemyHealth;
     private int enemyWeaponIndex;
-
+    public EnemyType type;
 
     private Bounds planeBounds;
     private float timeForNextSpawn;
@@ -45,6 +45,7 @@ public class EnemySpawner : MonoBehaviour
         planeBounds = level.GetSpawnBounds();
         
         enemySpeed = level.enemySpeed;
+        type = level.enemyType;
         enemyDamage = level.enemyDamage;
         enemyHealth = level.enemyHealth;
         enemyWeaponIndex = level.enemyWeaponIndex;
@@ -105,7 +106,6 @@ public class EnemySpawner : MonoBehaviour
         {
             Debug.Log("Could not find a spawn position");
         }
-        Debug.Log("Enemy spawned at " + spawnPosition);
         Enemy enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
         enemies.Add(enemy);
         SetUpEnemyProperties(enemy);
@@ -125,6 +125,7 @@ public class EnemySpawner : MonoBehaviour
 
     void SetUpEnemyProperties(Enemy enemy)
     {
+        enemy.SetType(type);
         enemy.speed = enemySpeed;
         enemy.damage = enemyDamage;
         enemy.totalHealth = enemyHealth;

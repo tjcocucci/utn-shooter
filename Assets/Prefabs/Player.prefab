@@ -186,7 +186,7 @@ MonoBehaviour:
   speed: 10
   weaponIndex: 0
   isAlive: 1
-  devMode: 1
+  devMode: 0
   weaponController: {fileID: 0}
 --- !u!114 &8380741406189761679
 MonoBehaviour:

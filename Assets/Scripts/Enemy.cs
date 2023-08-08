@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EnemyType
+{
+    easy,
+    medium,
+    hard
+}
+
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(WeaponController))]
 public class Enemy : DamageableObject
@@ -13,43 +20,111 @@ public class Enemy : DamageableObject
     public float damage = 10;
     public WeaponController weaponController;
     public int weaponIndex = 0;
-
-    private float timeForNextShot;
-    public float timeBetweenShots = 0.5f;
+    public EnemyType type;
+    private bool movementEnabled;
+    private int direction = 1;
+    private bool disableScheduled = false;
+    private bool directionSwitchScheduled = false;
 
     // Start is called before the first frame update
     public override void Start()
     {
+        movementEnabled = true;
         playerTransform = FindObjectOfType<Player>().transform;
         weaponController = GetComponent<WeaponController>();
         weaponController.EquipWeapon(weaponIndex);
-        timeForNextShot = Time.time + weaponController.weapon.timeBetweenShots;
         base.Start();
     }
+
+    public void SetType(EnemyType enemyType)
+    {
+        type = enemyType;
+        switch (type)
+        {
+            case EnemyType.easy:
+                GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+                break;
+            case EnemyType.medium:
+                GetComponent<Renderer>().material.SetColor("_Color", Color.yellow);
+                break;
+            case EnemyType.hard:
+                GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+                break;
+        }
+    }   
 
     void Update()
     {
         if (playerTransform != null)
         {
             distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
-            if (distanceToPlayer > distanceToPlayerThreshold)
-            {
-                transform.position += transform.forward * speed * Time.deltaTime;
-            }
             transform.LookAt(playerTransform);
+            if (distanceToPlayer > distanceToPlayerThreshold && movementEnabled)
+            {
+                Move();
+            }
 
+            transform.LookAt(playerTransform);
             Shoot();
+        }
+    }
+
+    private void DisableMovement()
+    {
+        movementEnabled = false;
+    }
+
+    private void EnableMovement()
+    {
+        movementEnabled = true;
+    }
+
+    IEnumerator DelayDisableMovementAndReenable(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        DisableMovement();
+        yield return new WaitForSeconds(delay);
+        EnableMovement();
+        disableScheduled = false;
+    }
+
+    IEnumerator DelayedDirectionSwitch()
+    {
+        float delay = Random.Range(0.5f, 2.0f);
+        yield return new WaitForSeconds(delay);
+        direction = -direction;
+        directionSwitchScheduled = false;
+    }
+
+    private void Move()
+    {
+        if (type == EnemyType.easy)
+        {
+            transform.position += transform.forward * speed * Time.deltaTime;
+            if (!disableScheduled)
+            {
+                disableScheduled = true;
+                StartCoroutine(DelayDisableMovementAndReenable(2));
+            }
+        }
+        else if (type == EnemyType.medium)
+        {
+            transform.position += transform.forward * speed * Time.deltaTime;
+        }
+        else if (type == EnemyType.hard)
+        {
+            transform.position += transform.forward * speed * Time.deltaTime;
+            transform.position += transform.right * direction * speed * Time.deltaTime;
+            if (!directionSwitchScheduled)
+            {
+                directionSwitchScheduled = true;
+                StartCoroutine(DelayedDirectionSwitch());
+            }
         }
     }
 
     public void Shoot()
     {
-        if (Time.time > timeForNextShot)
-        {
-            transform.LookAt(playerTransform);
-            weaponController.weapon.Shoot();
-            timeForNextShot =
-                Time.time + timeBetweenShots + (timeBetweenShots * 0.1f) * Random.Range(-1, 1);
-        }
+        weaponController.weapon.Shoot();
     }
 }

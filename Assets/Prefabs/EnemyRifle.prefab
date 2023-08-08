@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 2903454860560524263}
   - component: {fileID: 3123295647542885958}
   m_Layer: 0
-  m_Name: Rifle
+  m_Name: EnemyRifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112,7 +112,7 @@ MonoBehaviour:
   weaponName: Rifle
   gunMuzzleTransform: {fileID: 3536014115902897438}
   bulletPrefab: {fileID: 506297843129079274, guid: fe20226e1eacbf149b7417f929c716a2, type: 3}
-  damage: 60
+  damage: 30
   timeBetweenShots: 0.8
   bulletContarinerTransform: {fileID: 0}
 --- !u!1 &7943406458248303850

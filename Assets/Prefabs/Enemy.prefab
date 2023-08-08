@@ -158,6 +158,7 @@ MonoBehaviour:
   damage: 5
   weaponController: {fileID: 0}
   weaponIndex: 0
+  type: 0
   timeBetweenShots: 2
 --- !u!114 &3846187220613013925
 MonoBehaviour:
@@ -173,7 +174,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponList:
   - {fileID: 3123295647542885958, guid: cb0dbe1f0b678a24dbbf6db069c79645, type: 3}
-  weapon: {fileID: 0}
+  - {fileID: 3123295647542885958, guid: 52e3e4f85c2a7f54da03ebdf61b70833, type: 3}
+  weapon: {fileID: 3123295647542885958, guid: b74a91c95da2803448ba892d593fc3f2, type: 3}
   weaponHoldTransform: {fileID: 4603701688047240362}
 --- !u!1 &8725056192714789852
 GameObject:
