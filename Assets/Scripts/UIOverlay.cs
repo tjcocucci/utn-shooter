@@ -13,6 +13,8 @@ public class UIOverlay : MonoBehaviour
     public Text UIText;
     private LevelManager levelManager;
     private bool pauseUpdates;
+    public AudioSource winSound;
+    public AudioSource loseSound;
 
     private static UIOverlay _instance;
     public static UIOverlay Instance
@@ -89,6 +91,7 @@ public class UIOverlay : MonoBehaviour
 
     public void OnPlayerDeath()
     {
+        loseSound.Play();
         pauseUpdates = true;
         banner.SetText("You died!");
         banner.ShowBanner();
@@ -96,6 +99,7 @@ public class UIOverlay : MonoBehaviour
 
     public void OnWin()
     {
+        winSound.Play();
         pauseUpdates = true;
         banner.SetText("You win!");
         banner.ShowBanner();

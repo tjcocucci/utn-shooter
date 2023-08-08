@@ -50,3 +50,7 @@ El repositorio está subido en https://github.com/tjcocucci/utn-shooter
 - Varios aspectos son muy prototípicos, por ejemplo habría que calibrar la vida, velocidad de enemigos, velocidad de balas, etc. para que el juego sea algo más entretenido.
 - Al cambiar de nivel puede que un obstáculo se active superpuesto a un jugador. Esto se podría cambiar haciendo que el jugador reinicie al centro del mapa y asegurarse que no haya obstáculos ahí o generando mapas de manera procedural.
 - El jugador rota incorrectamente cuando el aim está muy cerca suyo.
+
+## Parte 2
+
+- No estoy seguro si poner un AudioSource para cada sonido es una buena práctica
