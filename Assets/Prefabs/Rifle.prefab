@@ -111,9 +111,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Rifle
   gunMuzzleTransform: {fileID: 3536014115902897438}
-  bulletPrefab: {fileID: 506297843129079274, guid: 5b742114cab090f4c965e111953ecd95, type: 3}
+  bulletPrefab: {fileID: 506297843129079274, guid: fe20226e1eacbf149b7417f929c716a2, type: 3}
   damage: 40
-  timeBetweenShots: 0.4
+  timeBetweenShots: 0.8
   bulletContarinerTransform: {fileID: 0}
 --- !u!1 &7943406458248303850
 GameObject:

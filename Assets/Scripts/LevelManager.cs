@@ -96,10 +96,23 @@ public class LevelManager : MonoBehaviour
         // Create Enemy Spawner
         enemySpawner.CleanUp();
         enemySpawner.SetUp(currentLevel, player);
-        enemySpawner.Enable();
+
+        if (levelIndex == 0)
+        {
+            UIOverlay.Instance.ShowInstructions();
+            StartCoroutine(enableSpawnerAfterDelay(5));
+        } else {
+            enemySpawner.Enable();
+        }
 
         UIOverlay.Instance.StartUI();
 
+    }
+
+    IEnumerator enableSpawnerAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        enemySpawner.Enable();
     }
 
     public void OnEnemyDeath()

@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b008dc87b685e3548b65fd69dcc35c09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
+  speed: 10
   timeToDestroy: 3
   offset: 0.1
   enemyCollisionMask:
@@ -159,7 +159,8 @@ MonoBehaviour:
   obstacleCollisionMask:
     serializedVersion: 2
     m_Bits: 64
-  bulletHitSound: {fileID: 0}
+  bulletObstacleHitSound: {fileID: 0}
+  bulletPlayerOrEnemyHitSound: {fileID: 0}
   bulletShootSound: {fileID: 786458552411102077}
 --- !u!82 &786458552411102077
 AudioSource:

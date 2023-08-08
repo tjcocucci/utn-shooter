@@ -10,6 +10,8 @@ public class Banner : MonoBehaviour
     public AudioSource buttonClickSound;
     public GameObject gameContainer;
     public GameObject menuGameObject;
+    public GameObject playButtonGameObject;
+    public GameObject goToMenuButtonGameObject;
 
     public void ShowBanner()
     {
@@ -19,6 +21,26 @@ public class Banner : MonoBehaviour
     public void SetText(string text)
     {
         bannerText.text = text;
+    }
+
+    void DeactivateButtons ()
+    {
+        playButtonGameObject.SetActive(false);
+        goToMenuButtonGameObject.SetActive(false);
+    }
+
+    void ActivateButtons ()
+    {
+        playButtonGameObject.SetActive(true);
+        goToMenuButtonGameObject.SetActive(true);
+    }
+
+    public void ShowInstructionBannerForSeconds(float seconds)
+    {
+        DeactivateButtons();
+        ShowBanner();
+        Invoke("HideBanner", seconds);
+        Invoke("ActivateButtons", seconds+0.5f);
     }
 
     public void HideBanner()

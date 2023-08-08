@@ -81,6 +81,12 @@ public class UIOverlay : MonoBehaviour
             + "\n";
     }
 
+    public void ShowInstructions()
+    {
+        banner.SetText("Use WASD to move, mouse to aim, and left click to shoot");
+        banner.ShowInstructionBannerForSeconds(5);
+    }
+
     public void OnPlayerDeath()
     {
         pauseUpdates = true;
