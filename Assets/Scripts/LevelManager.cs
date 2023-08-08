@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
     public Level[] levels;
     public int currentLevelIndex;
     public Level currentLevel;
+    public AudioSource startGameSound;
 
     [HideInInspector]
     public Player player;
@@ -99,6 +100,7 @@ public class LevelManager : MonoBehaviour
 
         if (levelIndex == 0)
         {
+            startGameSound.Play();
             UIOverlay.Instance.ShowInstructions();
             StartCoroutine(enableSpawnerAfterDelay(5));
         } else {
