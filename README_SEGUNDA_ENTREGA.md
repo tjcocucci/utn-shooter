@@ -11,3 +11,4 @@
 - No estoy seguro si poner un AudioSource para cada sonido es una buena práctica
 - Balance del juego mejorado pero no necesariamente perfeccionado. Capaz está muy difícil
 - No hice un buen tratamiento estético. Elegí colores y sonidos sin mucho criterio
+- Se puede activar el devMode en el prefab del jugador para tener más vida y pasar más rápido los niveles, también podés autodestruir al jugador apretando la tecla K
